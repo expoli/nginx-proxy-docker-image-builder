@@ -65,7 +65,7 @@ jobs:
         run: go get github.com/ddollar/forego
       -
         name: Build docker-gen
-        run: go get github.com/jwilder/docker-gen
+        run: go get github.com/jwilder/docker-gen && go build && go install
       -
         name: Get all things
         run: cp ~/go/bin/* . && ls -al
