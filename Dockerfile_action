@@ -6,12 +6,11 @@ RUN go get -v github.com/robfig/glock \
    && go get github.com/ddollar/forego \
    && pwd \
    && ls -al
-RUN export PATH="$PATH":/home/runner/go/bin/ \
 RUN go get github.com/jwilder/docker-gen 
-RUN cd  /home/runner/go/src/github.com/jwilder/docker-gen \
+RUN cd  /go/src/github.com/jwilder/docker-gen \
    && make get-deps \
    && make
-RUN mv docker-gen /home/runner/go/bin/
+RUN mv docker-gen /go/bin/
 
 FROM nginx:1.19.3
 LABEL maintainer="Cuyu Tang me@expoli.tech"
