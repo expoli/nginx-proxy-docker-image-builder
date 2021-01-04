@@ -37,6 +37,15 @@ jobs:
       - name: Get current date
         id: date
         run: echo "name=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Test with environment variables
+        run: echo $TAG_NAME - $RELEASE_NAME
+        env:
+          TAG_NAME: nightly-tag-${{ steps.date.outputs.date }}
+          RELEASE_NAME: nightly-release-${{ steps.date.outputs.date }}
+      - name: Test with input
+        uses: actions/hello-world-docker-action@master
+        with:
+          who-to-greet: Mona-the-Octocat-${{ steps.date.outputs.date }}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
