@@ -1,5 +1,22 @@
+FROM golang:leatest as GO_BUILD
+
+WORKDIR /app/
+
+RUN export  CGO_ENABLED=0 \
+   && echo "GOPATH" \
+   && go get -v github.com/robfig/glock \
+   && ls -al \
+   && go get github.com/ddollar/forego \
+   && export PATH="$PATH":~/go/bin/ \
+   && go get github.com/jwilder/docker-gen \
+   && cd  ~/go/src/github.com/jwilder/docker-gen \
+   && make get-deps \
+   && make \
+   && mv docker-gen ~/go/bin/
+
 FROM nginx:1.19.3
 LABEL maintainer="Cuyu Tang me@expoli.tech"
+COPY --from=MVN_BUILD ~/go/bin/* /usr/local/bin/
 
 # Install wget and install/updates certificates
 RUN apt-get update \
@@ -15,13 +32,14 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
  && sed -i 's/worker_processes  1/worker_processes  auto/' /etc/nginx/nginx.conf
 
 # Install Forego
-COPY forego /usr/local/bin/forego
-RUN chmod u+x /usr/local/bin/forego
+# COPY forego /usr/local/bin/forego
+RUN chmod u+x /usr/local/bin/forego \
+   && chmod u+x /usr/local/bin/docker-gen
 
-ENV DOCKER_GEN_VERSION 0.7.4
+# ENV DOCKER_GEN_VERSION 0.7.4
 
-COPY docker-gen /usr/local/bin/docker-gen 
-RUN chmod u+x /usr/local/bin/docker-gen
+# COPY docker-gen /usr/local/bin/docker-gen 
+# RUN chmod u+x /usr/local/bin/docker-gen
 
 COPY network_internal.conf /etc/nginx/
 
