@@ -16,7 +16,7 @@ RUN export  CGO_ENABLED=0 \
 
 FROM nginx:1.19.3
 LABEL maintainer="Cuyu Tang me@expoli.tech"
-COPY --from=MVN_BUILD ~/go/bin/* /usr/local/bin/
+COPY --from=GO_BUILD ~/go/bin/* /usr/local/bin/
 
 # Install wget and install/updates certificates
 RUN apt-get update \

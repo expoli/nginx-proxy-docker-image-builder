@@ -59,18 +59,18 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # -
+      #   name: Build glock
+      #   run: export  CGO_ENABLED=0 && echo "GOPATH" && go get -v github.com/robfig/glock && ls -al
+      # - 
+      #   name: Build forego
+      #   run: go get github.com/ddollar/forego
       -
-        name: Build glock
-        run: export  CGO_ENABLED=0 && echo "GOPATH" && go get -v github.com/robfig/glock && ls -al
-      - 
-        name: Build forego
-        run: go get github.com/ddollar/forego
-      -
-        name: Build docker-gen
-        run: export PATH="$PATH":~/go/bin/ && go get github.com/jwilder/docker-gen && cd  ~/go/src/github.com/jwilder/docker-gen && make get-deps && make && mv docker-gen ~/go/bin/
+        # name: Build docker-gen
+        # run: export PATH="$PATH":~/go/bin/ && go get github.com/jwilder/docker-gen && cd  ~/go/src/github.com/jwilder/docker-gen && make get-deps && make && mv docker-gen ~/go/bin/
       -
         name: Get all things
-        run: cp ~/go/bin/* . && git clone https://github.com/nginx-proxy/nginx-proxy.git && cp -r ./nginx-proxy/* .  && ls -al 
+        run: git clone https://github.com/nginx-proxy/nginx-proxy.git && cp -r ./nginx-proxy/* .  && ls -al 
       -
         name: Build and push
         uses: docker/build-push-action@v2
