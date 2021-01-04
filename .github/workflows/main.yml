@@ -68,7 +68,7 @@ jobs:
         run: export PATH="$PATH":~/go/bin/ && go get github.com/jwilder/docker-gen && cd  ~/go/src/github.com/jwilder/docker-gen && make get-deps && make && mv docker-gen ~/go/bin/
       -
         name: Get all things
-        run: cp ~/go/bin/* . && cp ~/go/src/github.com/jwilder/docker-gen/* . && ls -al 
+        run: cp ~/go/bin/* . && cp -r ~/go/src/github.com/jwilder/docker-gen/* . && ls -al 
       -
         name: Build and push
         uses: docker/build-push-action@v2
