@@ -40,12 +40,12 @@ jobs:
       - name: Test with environment variables
         run: echo $TAG_NAME - $RELEASE_NAME
         env:
-          TAG_NAME: nightly-tag-${{ steps.date.outputs.name }}
-          RELEASE_NAME: nightly-release-${{ steps.date.outputs.name }}
+          TAG_NAME: nightly-tag-$name
+          RELEASE_NAME: nightly-release-$name
       - name: Test with input
         uses: actions/hello-world-docker-action@master
         with:
-          who-to-greet: Mona-the-Octocat-${{ steps.date.outputs.date }}
+          who-to-greet: Mona-the-Octocat-$name
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
