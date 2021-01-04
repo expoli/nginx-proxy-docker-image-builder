@@ -60,12 +60,12 @@ jobs:
       -
         name: Build glock
         run: export  CGO_ENABLED=0 && echo "GOPATH" && go get -v github.com/robfig/glock && ls -al
-      -
-         name: Build docker-gen
-         run: go get github.com/jwilder/docker-gen
       - 
-         name: Build forego
-         run: go get github.com/ddollar/forego
+        name: Build forego
+        run: go get github.com/ddollar/forego
       -
-         name: Get all things
-         run: cp ~/go/bin/* . && ls -al
+        name: Build docker-gen
+        run: go get github.com/jwilder/docker-gen
+      -
+        name: Get all things
+        run: cp ~/go/bin/* . && ls -al
