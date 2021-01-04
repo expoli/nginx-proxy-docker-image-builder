@@ -34,6 +34,9 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v2
+      - name: Get current date
+        id: date
+        run: echo "name=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -60,5 +63,7 @@ jobs:
           context: .
           file: ./Dockerfile_action
           platforms: linux/amd64,linux/arm64/v8,linux/arm/v7,linux/arm/v6
-          push: true
-          tags: tangcuyu/nginx-proxy:latest
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            tangcuyu/nginx-proxy:latest
+            ${{ steps.date.outputs.date }}
