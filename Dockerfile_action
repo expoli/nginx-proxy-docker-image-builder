@@ -7,14 +7,14 @@ RUN go get -v github.com/robfig/glock \
    && go get github.com/ddollar/forego \
    && export PATH="$PATH":~/go/bin/ \
    && go get github.com/jwilder/docker-gen \
-   && cd  ~/go/src/github.com/jwilder/docker-gen \
+   && cd  /home/runner/go/src/github.com/jwilder/docker-gen \
    && make get-deps \
    && make \
-   && mv docker-gen ~/go/bin/
+   && mv docker-gen /home/runner/go/bin/
 
 FROM nginx:1.19.3
 LABEL maintainer="Cuyu Tang me@expoli.tech"
-COPY --from=GO_BUILD ~/go/bin/* /usr/local/bin/
+COPY --from=GO_BUILD /home/runner/go/bin/* /usr/local/bin/
 
 # Install wget and install/updates certificates
 RUN apt-get update \
