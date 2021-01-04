@@ -7,8 +7,8 @@ RUN go get -v github.com/robfig/glock \
    && pwd \
    && ls -al
 RUN export PATH="$PATH":/home/runner/go/bin/ \
-   && go get github.com/jwilder/docker-gen \
-   && cd  /home/runner/go/src/github.com/jwilder/docker-gen \
+RUN go get github.com/jwilder/docker-gen 
+RUN cd  /home/runner/go/src/github.com/jwilder/docker-gen \
    && make get-deps \
    && make
 RUN mv docker-gen /home/runner/go/bin/
