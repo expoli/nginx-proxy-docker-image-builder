@@ -77,6 +77,6 @@ jobs:
         with:
           context: .
           file: ./Dockerfile_action
-          platforms: linux/amd64,linux/arm64/v8,linux/arm/v7,linux/arm/v6
+          platforms: linux/amd64
           push: true
           tags: tangcuyu/nginx-proxy:latest

@@ -10,11 +10,11 @@ RUN go get github.com/jwilder/docker-gen
 RUN cd  /go/src/github.com/jwilder/docker-gen \
    && make get-deps \
    && make
-RUN mv docker-gen /go/bin/
+RUN mv /go/src/github.com/jwilder/docker-gen/docker-gen /go/bin/docker-gen
 
 FROM nginx:1.19.3
 LABEL maintainer="Cuyu Tang me@expoli.tech"
-COPY --from=GO_BUILD /home/runner/go/bin/* /usr/local/bin/
+COPY --from=GO_BUILD /go/bin/* /usr/local/bin/
 
 # Install wget and install/updates certificates
 RUN apt-get update \
