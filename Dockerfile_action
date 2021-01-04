@@ -3,14 +3,15 @@ FROM golang:latest as GO_BUILD
 RUN export  CGO_ENABLED=0 \
    && echo "GOPATH" 
 RUN go get -v github.com/robfig/glock \
-   && ls -al \
    && go get github.com/ddollar/forego \
-   && export PATH="$PATH":~/go/bin/ \
+   && pwd \
+   && ls -al
+RUN export PATH="$PATH":/home/runner/go/bin/ \
    && go get github.com/jwilder/docker-gen \
    && cd  /home/runner/go/src/github.com/jwilder/docker-gen \
    && make get-deps \
-   && make \
-   && mv docker-gen /home/runner/go/bin/
+   && make
+RUN mv docker-gen /home/runner/go/bin/
 
 FROM nginx:1.19.3
 LABEL maintainer="Cuyu Tang me@expoli.tech"
