@@ -65,7 +65,7 @@ jobs:
       # - 
       #   name: Build forego
       #   run: go get github.com/ddollar/forego
-      -
+      # -
         # name: Build docker-gen
         # run: export PATH="$PATH":~/go/bin/ && go get github.com/jwilder/docker-gen && cd  ~/go/src/github.com/jwilder/docker-gen && make get-deps && make && mv docker-gen ~/go/bin/
       -
