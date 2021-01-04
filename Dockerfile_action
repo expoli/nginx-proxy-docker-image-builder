@@ -1,4 +1,5 @@
-FROM golang:latest as GO_BUILD   # as go builder
+# as go builder
+FROM golang:latest as GO_BUILD
 
 # don't use CGO
 RUN export  CGO_ENABLED=0 \
