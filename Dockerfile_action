@@ -1,19 +1,29 @@
-FROM golang:latest as GO_BUILD
+FROM golang:latest as GO_BUILD   # as go builder
 
+# don't use CGO
 RUN export  CGO_ENABLED=0 \
    && echo "GOPATH" 
+
+# docker_gen depend
 RUN go get -v github.com/robfig/glock \
    && go get github.com/ddollar/forego \
    && pwd \
    && ls -al
+
+# get docker-gen source code
 RUN go get github.com/jwilder/docker-gen 
 RUN cd  /go/src/github.com/jwilder/docker-gen \
    && make get-deps \
    && make
+
+# Get the docker-gen
 RUN mv /go/src/github.com/jwilder/docker-gen/docker-gen /go/bin/docker-gen
 
+# build the nginx-proxy image
 FROM nginx:1.19.3
 LABEL maintainer="Cuyu Tang me@expoli.tech"
+
+# copy files from the builder
 COPY --from=GO_BUILD /go/bin/* /usr/local/bin/
 
 # Install wget and install/updates certificates
@@ -33,11 +43,6 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
 # COPY forego /usr/local/bin/forego
 RUN chmod u+x /usr/local/bin/forego \
    && chmod u+x /usr/local/bin/docker-gen
-
-# ENV DOCKER_GEN_VERSION 0.7.4
-
-# COPY docker-gen /usr/local/bin/docker-gen 
-# RUN chmod u+x /usr/local/bin/docker-gen
 
 COPY network_internal.conf /etc/nginx/
 
