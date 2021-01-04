@@ -65,7 +65,16 @@ jobs:
         run: go get github.com/ddollar/forego
       -
         name: Build docker-gen
-        run: go get github.com/jwilder/docker-gen && cd ~/go/src/github.com/jwilder/docker-gen && go build && go install
+        run: export PATH="$PATH":~/go/bin/ && go get github.com/jwilder/docker-gen && cd  ~/go/src/github.com/jwilder/docker-gen && make get-deps && make && mv docker-gen ~/go/bin/
       -
         name: Get all things
-        run: cp ~/go/bin/* . && ls -al
+        run: cp ~/go/bin/* . && git clone https://github.com/nginx-proxy/nginx-proxy.git && cp -r ./nginx-proxy/* .  && ls -al 
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile_action
+          platforms: linux/amd64,linux/arm64/v8,linux/arm/v7,linux/arm/v6
+          push: true
+          tags: tangcuyu/nginx-proxy:latest

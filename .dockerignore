@@ -1,0 +1,9 @@
+README.md
+.git/*
+.github/*
+nginx-proxy/
+.dockerignore
+circle.yml
+Makefile
+test
+glock

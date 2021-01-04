@@ -15,12 +15,12 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
  && sed -i 's/worker_processes  1/worker_processes  auto/' /etc/nginx/nginx.conf
 
 # Install Forego
-ADD ./forego /usr/local/bin/forego
+COPY forego /usr/local/bin/forego
 RUN chmod u+x /usr/local/bin/forego
 
 ENV DOCKER_GEN_VERSION 0.7.4
 
-ADD ./docker-gen /usr/local/bin/docker-gen 
+COPY docker-gen /usr/local/bin/docker-gen 
 RUN chmod u+x /usr/local/bin/docker-gen
 
 COPY network_internal.conf /etc/nginx/
