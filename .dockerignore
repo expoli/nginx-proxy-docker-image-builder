@@ -7,5 +7,3 @@ circle.yml
 Makefile
 test
 glock
-docker-gen
-forego
