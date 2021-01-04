@@ -1,10 +1,8 @@
 FROM golang:latest as GO_BUILD
 
-WORKDIR /app/
-
 RUN export  CGO_ENABLED=0 \
-   && echo "GOPATH" \
-   && go get -v github.com/robfig/glock \
+   && echo "GOPATH" 
+RUN go get -v github.com/robfig/glock \
    && ls -al \
    && go get github.com/ddollar/forego \
    && export PATH="$PATH":~/go/bin/ \
