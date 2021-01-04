@@ -2,3 +2,10 @@ README.md
 .git/*
 .github/*
 docker-gen/*
+.dockerignore
+circle.yml
+Makefile
+test
+glock
+docker-gen
+forego
