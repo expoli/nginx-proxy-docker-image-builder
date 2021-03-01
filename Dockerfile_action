@@ -10,7 +10,7 @@ RUN go get github.com/robfig/glock \
    && go get github.com/ddollar/forego 
 
 # get docker-gen source code
-RUN git clone github.com/jwilder/docker-gen -O /go/src/github.com/jwilder/docker-gen \
+RUN git clone github.com/jwilder/docker-gen /go/src/github.com/jwilder/docker-gen \
    && pwd \
    && ls -al /go/src/ \
    && ls -al /go/bin
