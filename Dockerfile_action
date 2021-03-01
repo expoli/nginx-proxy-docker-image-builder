@@ -3,7 +3,7 @@ FROM golang:latest as GO_BUILD
 
 # don't use CGO
 RUN export  CGO_ENABLED=0 \
-   && echo "GOPATH" 
+   && echo $GOPATH
 
 # docker_gen depend
 RUN go get github.com/robfig/glock \
