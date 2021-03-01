@@ -7,12 +7,10 @@ RUN export  CGO_ENABLED=0 \
 
 # docker_gen depend
 RUN go get github.com/robfig/glock \
-   && go get github.com/ddollar/forego \
-   && pwd \
-   && ls -al
+   && go get github.com/ddollar/forego 
 
 # get docker-gen source code
-RUN go get github.com/jwilder/docker-gen \
+RUN git clone github.com/jwilder/docker-gen -O /go/src/github.com/jwilder/docker-gen \
    && pwd \
    && ls -al /go/src/ \
    && ls -al /go/bin
