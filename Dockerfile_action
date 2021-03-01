@@ -14,7 +14,8 @@ RUN go get github.com/robfig/glock \
 # get docker-gen source code
 RUN go get github.com/jwilder/docker-gen \
    && pwd \
-   && ls -al /usr/src/
+   && ls -al /go/src/ \
+   && ls -al /go/bin
 RUN cd  /go/src/github.com/jwilder/docker-gen \
    && make get-deps \
    && make
