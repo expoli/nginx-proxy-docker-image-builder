@@ -13,6 +13,9 @@ RUN go get github.com/robfig/glock \
 RUN mkdir -p /go/src/github.com/jwilder/ \
    && cd /go/src/github.com/jwilder/ \
    && git clone https://github.com/jwilder/docker-gen.git \
+   && mkdir -p /go/src/github.com/docker \
+   && cd /go/src/github.com/docker/ \
+   && git clone  https://github.com/docker/go-units.git \
    && pwd \
    && ls -al /go/src/ \
    && ls -al /go/bin
